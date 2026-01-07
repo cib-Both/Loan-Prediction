@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Approval Prediction System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="background-animation">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-university"></i>
+            </div>
+            <h1>Loan Approval Prediction</h1>
+            <p class="subtitle">Powered by Advanced Machine Learning</p>
+            <div class="header-stats">
+                <div class="stat">
+                    <i class="fas fa-check-circle"></i>
+                    <span>95% Accuracy</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-bolt"></i>
+                    <span>Instant Results</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Secure & Private</span>
+                </div>
+            </div>
+        </header>
+
+        <form id="loanForm">
+            <!-- Personal Information -->
+            <div class="section">
+                <h2><i class="fas fa-user"></i> Personal Information</h2>
+                
+                <div class="form-group">
+                    <label for="dependents">Number of Dependents</label>
+                    <input type="number" id="dependents" name="no_of_dependents" min="0" max="10" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="education">Education Level</label>
+                    <select id="education" name="education" required>
+                        <option value="">Select Education</option>
+                        <option value="Graduate">Graduate</option>
+                        <option value="Not Graduate">Not Graduate</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="selfEmployed">Self Employed</label>
+                    <select id="selfEmployed" name="self_employed" required>
+                        <option value="">Select Employment Status</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Financial Information -->
+            <div class="section">
+                <h2><i class="fas fa-dollar-sign"></i> Financial Information</h2>
+                
+                <div class="form-group">
+                    <label for="income"><i class="fas fa-money-bill-wave"></i> Annual Income ($)</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">$</span>
+                        <input type="number" id="income" name="income_annum" min="0" step="1000" required placeholder="50,000">
+                    </div>
+                    <small>Enter your annual income in dollars</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="loanAmount"><i class="fas fa-hand-holding-usd"></i> Loan Amount ($)</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">$</span>
+                        <input type="number" id="loanAmount" name="loan_amount" min="0" step="1000" required placeholder="100,000">
+                    </div>
+                    <small>Amount you wish to borrow</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="loanTerm">Loan Term (Years)</label>
+                    <input type="number" id="loanTerm" name="loan_term" min="1" max="30" required>
+                    <small>Duration of the loan in years</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="cibilScore">CIBIL Score</label>
+                    <input type="number" id="cibilScore" name="cibil_score" min="300" max="900" required>
+                    <small>Your credit score (300-900)</small>
+                </div>
+            </div>
+
+            <!-- Assets Information -->
+            <div class="section">
+                <h2><i class="fas fa-home"></i> Assets Information</h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="residentialAssets"><i class="fas fa-building"></i> Residential Assets ($)</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">$</span>
+                            <input type="number" id="residentialAssets" name="residential_assets_value" min="0" step="1000" required placeholder="150,000">
+                        </div>
+                        <small>Value of residential properties</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="commercialAssets"><i class="fas fa-store"></i> Commercial Assets ($)</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">$</span>
+                            <input type="number" id="commercialAssets" name="commercial_assets_value" min="0" step="1000" required placeholder="50,000">
+                        </div>
+                        <small>Value of commercial properties</small>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="luxuryAssets"><i class="fas fa-gem"></i> Luxury Assets ($)</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">$</span>
+                            <input type="number" id="luxuryAssets" name="luxury_assets_value" min="0" step="1000" required placeholder="25,000">
+                        </div>
+                        <small>Value of luxury items (cars, jewelry, etc.)</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bankAssets"><i class="fas fa-piggy-bank"></i> Bank Assets ($)</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">$</span>
+                            <input type="number" id="bankAssets" name="bank_asset_value" min="0" step="1000" required placeholder="20,000">
+                        </div>
+                        <small>Total bank deposits and savings</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="button-group">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-chart-line"></i>
+                    Predict Loan Approval
+                </button>
+                <button type="reset" class="btn btn-secondary">
+                    <i class="fas fa-redo"></i>
+                    Clear Form
+                </button>
+            </div>
+        </form>
+
+        <!-- Result Section -->
+        <div id="result" class="result-section hidden">
+            <div class="result-content">
+                <div class="result-icon" id="resultIcon"></div>
+                <h2 id="resultTitle"></h2>
+                <p id="resultMessage"></p>
+                <div class="result-details" id="resultDetails"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p><i class="fas fa-code"></i> © 2026 Loan Approval Prediction System</p>
+            <p><i class="fas fa-robot"></i> Powered by Advanced Machine Learning</p>
+        </div>
+    </footer>
+
+    <script>
+        const API_URL = 'http://localhost:5000';
+
+        // Form submission handler
+        document.getElementById('loanForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            // Show loading state
+            showLoading();
+
+            try {
+                // Send data to backend API
+                const response = await fetch(`${API_URL}/predict`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.status === 'success') {
+                    displayResult(result);
+                } else {
+                    displayError(result.message || 'Prediction failed');
+                }
+            } catch (error) {
+                displayError('Unable to connect to server. Make sure the backend API is running on http://localhost:5000');
+            }
+        });
+
+        function showLoading() {
+            const resultSection = document.getElementById('result');
+            const resultIcon = document.getElementById('resultIcon');
+            const resultTitle = document.getElementById('resultTitle');
+            const resultMessage = document.getElementById('resultMessage');
+            const resultDetails = document.getElementById('resultDetails');
+
+            resultSection.classList.remove('hidden', 'result-approved', 'result-rejected');
+            resultIcon.innerHTML = '<div class="loading"></div>';
+            resultTitle.textContent = 'Processing...';
+            resultMessage.textContent = 'Analyzing your application with our ML model';
+            resultDetails.innerHTML = '';
+            
+            resultSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function displayResult(result) {
+            const resultSection = document.getElementById('result');
+            const resultIcon = document.getElementById('resultIcon');
+            const resultTitle = document.getElementById('resultTitle');
+            const resultMessage = document.getElementById('resultMessage');
+            const resultDetails = document.getElementById('resultDetails');
+
+            // Remove loading class
+            resultSection.classList.remove('hidden');
+
+            // Set approval/rejection styling
+            const isApproved = result.prediction === 'Approved';
+            if (isApproved) {
+                resultSection.classList.add('result-approved');
+                resultSection.classList.remove('result-rejected');
+                resultIcon.innerHTML = '<i class="fas fa-check-circle"></i>';
+                resultTitle.textContent = 'Loan Approved!';
+                resultMessage.innerHTML = '<i class="fas fa-party-horn"></i> Congratulations! Your loan application has been approved.';
+            } else {
+                resultSection.classList.add('result-rejected');
+                resultSection.classList.remove('result-approved');
+                resultIcon.innerHTML = '<i class="fas fa-times-circle"></i>';
+                resultTitle.textContent = 'Loan Rejected';
+                resultMessage.textContent = 'Unfortunately, your loan application has been rejected at this time.';
+            }
+
+            // Display detailed results
+            let detailsHTML = '<div class="prediction-details">';
+            
+            // Confidence score
+            detailsHTML += `
+                <div class="detail-card confidence-card">
+                    <h3><i class="fas fa-chart-bar"></i> Prediction Confidence</h3>
+                    <div class="confidence-bar">
+                        <div class="confidence-fill ${isApproved ? 'approved' : 'rejected'}" 
+                             style="width: ${result.confidence}%">
+                            ${result.confidence}%
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Probabilities
+            detailsHTML += `
+                <div class="detail-card probability-card">
+                    <h3><i class="fas fa-percentage"></i> Approval Probabilities</h3>
+                    <div class="probability-item success">
+                        <i class="fas fa-check"></i>
+                        <span>Approval:</span>
+                        <strong>${result.details.approval_probability}%</strong>
+                    </div>
+                    <div class="probability-item danger">
+                        <i class="fas fa-times"></i>
+                        <span>Rejection:</span>
+                        <strong>${result.details.rejection_probability}%</strong>
+                    </div>
+                </div>
+            `;
+
+            // Risk factors
+            detailsHTML += `
+                <div class="detail-card risk-card">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Risk Analysis</h3>
+                    <ul class="risk-list">
+                        ${result.details.risk_factors.map(factor => `<li class="risk-item"><i class="fas fa-info-circle"></i> ${factor}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+            
+            // Positive factors
+            if (result.details.positive_factors && result.details.positive_factors.length > 0) {
+                detailsHTML += `
+                    <div class="detail-card positive-card">
+                        <h3><i class="fas fa-check-circle"></i> Positive Factors</h3>
+                        <ul class="positive-list">
+                            ${result.details.positive_factors.map(factor => `<li class="positive-item"><i class="fas fa-check"></i> ${factor}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+
+            // Applicant summary
+            const summary = result.details.applicant_summary;
+            detailsHTML += `
+                <div class="detail-card summary-card">
+                    <h3><i class="fas fa-user-circle"></i> Application Summary</h3>
+                    <div class="summary-item">
+                        <i class="fas fa-star"></i>
+                        <span>CIBIL Score:</span>
+                        <strong>${summary.cibil_score}</strong>
+                    </div>
+                    <div class="summary-item">
+                        <i class="fas fa-wallet"></i>
+                        <span>Annual Income:</span>
+                        <strong>${summary.annual_income}</strong>
+                    </div>
+                    <div class="summary-item">
+                        <i class="fas fa-coins"></i>
+                        <span>Loan Amount:</span>
+                        <strong>${summary.loan_amount}</strong>
+                    </div>
+                    <div class="summary-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Loan Term:</span>
+                        <strong>${summary.loan_term}</strong>
+                    </div>
+                    <div class="summary-item">
+                        <i class="fas fa-chart-pie"></i>
+                        <span>Total Assets:</span>
+                        <strong>${summary.total_assets}</strong>
+                    </div>
+                    <div class="summary-item">
+                        <i class="fas fa-balance-scale"></i>
+                        <span>Loan-to-Income:</span>
+                        <strong>${summary.loan_to_income_ratio}</strong>
+                    </div>
+                </div>
+            `;
+
+            detailsHTML += '</div>';
+            resultDetails.innerHTML = detailsHTML;
+            
+            resultSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function displayError(message) {
+            const resultSection = document.getElementById('result');
+            const resultIcon = document.getElementById('resultIcon');
+            const resultTitle = document.getElementById('resultTitle');
+            const resultMessage = document.getElementById('resultMessage');
+            const resultDetails = document.getElementById('resultDetails');
+
+            resultSection.classList.remove('hidden', 'result-approved', 'result-rejected');
+            resultIcon.textContent = '⚠️';
+            resultTitle.textContent = 'Error';
+            resultMessage.textContent = message;
+            resultDetails.innerHTML = `
+                <div class="info-box" style="border-left-color: #ff9800; background: #fff3e0;">
+                    <p><strong>Troubleshooting:</strong></p>
+                    <ol>
+                        <li>Make sure the Flask backend is running (python app.py)</li>
+                        <li>Check that the server is accessible at http://localhost:5000</li>
+                        <li>Ensure all required model files are present</li>
+                    </ol>
+                </div>
+            `;
+            
+            resultSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Add input validation and formatting
+        document.querySelectorAll('input[type="number"]').forEach(input => {
+            input.addEventListener('input', function() {
+                if (this.value < 0) this.value = 0;
+            });
+        });
+    </script>
+</body>
+</html>
