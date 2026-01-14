@@ -658,6 +658,24 @@ form {
     font-size: 1.1em;
 }
 
+.risk-list .no-risk-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px;
+    margin: 8px 0;
+    background: #d1fae5;
+    border-radius: 8px;
+    color: #065f46;
+    border-left: 3px solid var(--success);
+}
+
+.risk-list .no-risk-item i {
+    color: var(--success);
+    margin-top: 2px;
+    font-size: 1.1em;
+}
+
 /* Positive Card */
 .positive-card {
     border-left: 4px solid var(--success);
